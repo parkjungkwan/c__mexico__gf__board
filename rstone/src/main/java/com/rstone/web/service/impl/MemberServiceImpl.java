@@ -2,18 +2,25 @@ package com.rstone.web.service.impl;
 
 import java.util.List;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.rstone.web.common.Calc;
 import com.rstone.web.domain.MemberDTO;
 import com.rstone.web.mapper.MemberMapper;
 import com.rstone.web.service.MemberService;
 @Service
 public class MemberServiceImpl implements MemberService{
+	static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 	@Autowired MemberMapper mapper;
+	@Autowired Calc calc;
 	@Override
 	public void add(MemberDTO p) {
-		
+		String ssn = p.getSsn();
+		p.setAge(calc.age(ssn));
+		p.setGender((ssn.split("-")[1].equals("1"))?"남":"여");
+		mapper.insert(p);
 	}
 
 	@Override
@@ -30,10 +37,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public MemberDTO retrieve(MemberDTO p) {
-		System.out.println("Param Id is "+p.getUserid());
-		MemberDTO m = mapper.selectOne(p); 
-		System.out.println("Result Id is "+m.getUserid());
-		return m;
+		return mapper.selectOne(p); 
 	}
 
 	@Override
@@ -44,7 +48,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void modify(MemberDTO p) {
-		// TODO Auto-generated method stub
+		mapper.update(p);
 		
 	}
 
@@ -56,8 +60,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public boolean login(MemberDTO p) {
-		// TODO Auto-generated method stub
-		return false;
+		return (mapper.selectOne(p) != null);
 	}
 
 }

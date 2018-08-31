@@ -12,6 +12,24 @@
     
      FROM MEMBER 
     WHERE USERID LIKE #{userid}
+     <if test="password != null and password != ''">
+	    	AND password LIKE #{password}
+	    </if>
   </select>
-  
+  <update id="update">
+		UPDATE MEMBER SET 
+			TEAMID = #{teamid},
+			PASSWORD = #{password},
+	        PHONE = #{phone},
+	        EMAIL = #{email},
+	        TEAMID = #{teamid}
+		<if test="password != ''">
+		, PASSWORD = #{password}
+		</if>
+		WHERE USERID LIKE #{userid} 
+	</update>
+	<delete id="delete">
+		DELETE FROM MEMBER
+		WHERE USERID LIKE #{userid}
+	</delete>
 </mapper>

@@ -57,10 +57,10 @@
 </nav>
 <script>
 $('#login__btn').click(function(){
-	location.href = '${context}/move/auth/member/login';
+	location.href = '${context}/move/permission/member/login';
 });
 $('#add__btn').click(function(){
-	location.href = '${context}/move/auth/member/add';
+	location.href = '${context}/move/permission/member/add';
 });
 
 </script>

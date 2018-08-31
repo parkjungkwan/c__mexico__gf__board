@@ -28,7 +28,18 @@
 				<td>역할</td>
 				<td>${user.roll}</td>
 			</tr>
+			<tr>
+				<td colspan="4">
+					<button id="retrieve__modify__btn">
+						수 정
+					</button>
+				</td>
+			</tr>
 		</table>
 </div>
-
+<script>
+$('#retrieve__modify__btn').click(function() {
+	location.href = '${context}/move/auth/member/modify';
+});
+</script>
 

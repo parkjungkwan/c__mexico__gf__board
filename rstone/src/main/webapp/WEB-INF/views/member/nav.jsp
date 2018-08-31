@@ -44,7 +44,7 @@
           	<li><a id="mypage__btn" >마이페이지</a></li>
           	<li><a id="modify__btn" >정보수정</a></li>
             <li><a id="logout__btn" >로그아웃</a></li>
-            
+            <li><a id="member__remove__btn" >회원탈퇴</a></li>
           </ul>
         </li>
       </ul>
@@ -52,22 +52,17 @@
   </div><!-- /.container-fluid -->
 </nav>
 <script>
-alert('board__nav enter!!');
-$('#modify__btn')
-	.click(
-		function() {
-			location.href = '${context}/move/public/member/modify';
-		});
-$('myPageMoveToDelete')
-.click(
-	function() {
-		location.href = '${context}/move/public/member/delete';
-	});
+$('#modify__btn').click(function() {
+	location.href = '${context}/move/public/member/modify';
+});
+$('#mypage__btn').click(function() {
+	location.href = '${context}/move/auth/member/retrieve';
+});
+$('#member__remove__btn').click(function() {
+	location.href = '${context}/move/auth/member/remove';
+});
 $('#board__write').click(function(){
-	alert('board__write click!!');
-	function() {
-		location.href = '${context}/move/public/board/write';
-	}
+	location.href = '${context}/move/public/board/write';
 });
 $('#board__list').click(function(){
 	alert('board__list click!!');

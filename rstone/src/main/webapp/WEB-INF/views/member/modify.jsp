@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	<div id="contentBox" style="width:100%; height:300px;">
-	<form id="updateForm">
+	<form id="member__modify__form">
 	<table id="updateTable" style="width:100%; height:100%;">
 		<tr>
 			<td id="updateMemberProfile" rowspan="3" colspan="2">
@@ -49,7 +49,7 @@
 			</td>
 		</tr>
 	</table>
-	<input type="button" id="confirmBtn" value="수정확인" />
+	<input type="button" id="modify__submit" value="수정확인" />
 	</form>
 </div>
 <form method="POST" enctype="multipart/form-data" 
@@ -58,25 +58,14 @@
   <input type="submit" value="파일업로드"> 
 </form>
 <script>
-var form = document.getElementById('updateForm');
-for(var i=1;i<=4;i++){
-	if(document.getElementById('teamid_'+i).value
-			==='${user.teamid}'){
-		document.getElementById('teamid_'+i).checked = true;
-	}
-}
-var roll = document.getElementById("roll");
-for(var i=0;i<roll.options.length;i++){
-	 if(roll.options[i].value==='${user.roll}'){
-		 roll.options[i].setAttribute("selected","selected");
-	} 	
-}
-form.team.setAttribute("selected","selected");
-	document.getElementById("confirmBtn")
-	.addEventListener('click',function(){
-		alert('수정확인버튼 클릭함 !!');
-		// 업데이트 실행 하세요..DB 까지
-	});
+$('#modify__submit').click(function() {
+	$('#member__modify__form')
+	.attr({
+		action:"${context}/member/modify",
+		method:"POST"
+	})
+	.submit();
+});
 </script>
 
 
